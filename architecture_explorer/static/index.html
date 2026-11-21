@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Angular Architecture Explorer</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <h1>Angular Architecture Explorer</h1>
+    <p class="tagline">Search bundled fixture sources, keep a selection, save it as an exploration.</p>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Saved explorations</h2>
+      <p id="project-list-note" class="muted" role="status"></p>
+      <ul id="project-list" class="project-list"></ul>
+    </aside>
+
+    <main id="main" class="main" tabindex="-1">
+      <section class="panel" aria-labelledby="exploration-heading">
+        <h2 id="exploration-heading">Exploration</h2>
+
+        <div class="field">
+          <label for="title">Exploration title</label>
+          <input id="title" type="text" maxlength="120" autocomplete="off" aria-describedby="title-error">
+          <p id="title-error" class="field-error" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="query">Search query</label>
+          <div class="inline">
+            <input id="query" type="text" maxlength="200" autocomplete="off" spellcheck="false" aria-describedby="query-hint query-error">
+            <button id="search-btn" type="button" class="btn">Search</button>
+          </div>
+          <p id="query-hint" class="hint">Literal, case-sensitive match. Press Enter to search, <kbd>/</kbd> to focus this field.</p>
+          <p id="query-error" class="field-error" hidden></p>
+        </div>
+
+        <div class="actions">
+          <button id="save-btn" type="button" class="btn btn-primary">Save exploration</button>
+          <button id="new-btn" type="button" class="btn">New exploration</button>
+          <span id="status" class="status" role="status" aria-live="polite">New exploration</span>
+        </div>
+
+        <div id="error" class="error-box" role="alert" hidden></div>
+        <p id="selection-note" class="note" hidden></p>
+      </section>
+
+      <div class="split">
+        <section class="panel results-panel" aria-labelledby="results-heading">
+          <h2 id="results-heading">Results</h2>
+          <p id="result-count" class="muted" role="status">Enter a query and press Search.</p>
+          <ul id="results" class="results" aria-labelledby="results-heading"></ul>
+        </section>
+
+        <section class="panel preview-panel" aria-labelledby="preview-heading">
+          <h2 id="preview-heading">File preview</h2>
+          <p id="preview-caption" class="muted mono"></p>
+          <div id="preview" class="preview" tabindex="0" role="region" aria-labelledby="preview-heading">
+            <p class="empty">Select a result to preview its file.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

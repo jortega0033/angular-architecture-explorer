@@ -15,7 +15,7 @@ Today it searches four bundled synthetic `.ts` fixtures and saves explorations. 
 | Product scope, API summary (§5), invariants (§6), check IDs `AE-C01`..`AE-C37` (§8) | [docs/PRD.md](docs/PRD.md) |
 | Traced workflow, module boundaries, invariants with source lines, implemented / planned / needs-verification status, PRD drift | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
 | Run, test and demo steps for users | [README.md](README.md) |
-| Backlog | GitHub issues: epic #1 and its child issues #2 to #10 (linked as sub-issues; order and dependencies in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#backlog-map)). The PRD's "backlog" means these issues. |
+| Backlog | GitHub issues: epic #1 and its child issues #2 to #13 (linked as sub-issues; #10 is closed; order and dependencies in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#backlog-map)). The PRD's "backlog" means these issues. |
 | Agent roles and the triage loop | [docs/agents-and-loop.md](docs/agents-and-loop.md), [LOOP.md](LOOP.md) |
 
 If code and a document disagree, the code and its tests describe current behaviour; fix the document in the same pull request or record the drift in `docs/ARCHITECTURE.md`.
@@ -62,7 +62,7 @@ Details and line references are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Evidence before claiming a ticket done
 
-Report only what you ran and saw. Order: local checks, then Code Reviewer and Reality Checker on the full diff and the recorded local evidence, then a draft pull request, then CI on it, then `gh pr ready` only when CI is green. Items 1 to 7 exist before the draft pull request is opened; item 8 is added after. For every ticket, the pull request description carries:
+Report only what you ran and saw. Order: local checks, then the diff and evidence written to `.claude/state/review/`, then Code Reviewer and Reality Checker on the full diff and the recorded local evidence, then a draft pull request, then CI on it, then `gh pr ready` only when CI is green. Items 1 to 7 exist before the draft pull request is opened; item 8 is added after. For every ticket, the pull request description carries:
 
 1. The exact command and the tail of its output for `python -m unittest discover -s tests -v`, with the test count. `AE-C01`..`AE-C18` must still pass.
 2. The names of the new tests and the `AE-C` IDs they cover, each test carrying its ID in a comment as the existing tests do. Expected values are written by hand in the test, never computed by the code under test (`PRD §6.2`).
@@ -84,7 +84,7 @@ If something could not be verified, say so in the pull request instead of markin
 | When | Roles |
 |---|---|
 | Before coding | Codebase Onboarding Engineer (unfamiliar area), Software Architect (boundary, schema, API or dependency change) |
-| While coding | The implementing role that matches the files being changed: Backend Architect, Frontend Developer, Test Automation Engineer (tests and test infrastructure, including the tokenizer table tests of #8 and the CI workflow) |
+| While coding | The implementing role that matches the files being changed: Backend Architect, Frontend Developer, Test Automation Engineer (tests and test infrastructure, including the tokenizer table tests of #8 and any CI workflow change) |
 | After coding, when the change matches | Accessibility Auditor (UI), API Tester (HTTP contract) |
 | Gates on every ticket, whatever its size | After local checks pass and before the draft pull request: Code Reviewer on the full diff, then Reality Checker against the acceptance criteria and the recorded local evidence |
 
@@ -97,9 +97,9 @@ If something could not be verified, say so in the pull request instead of markin
 
 How a ticket gets from the backlog to a pull request. Each piece is defined in its own file; this part only links them.
 
-- **Start and playbook.** The owner starts a ticket with `/next-ticket` ([skill](.claude/skills/next-ticket/SKILL.md)), which is the go signal and runs the [`implement-ticket`](.claude/skills/implement-ticket/SKILL.md) playbook for one ticket. There is no scheduler.
+- **Start and playbook.** The owner starts a ticket with `/next-ticket` ([skill](.claude/skills/next-ticket/SKILL.md)), which is the go signal and runs the [`implement-ticket`](.claude/skills/implement-ticket/SKILL.md) playbook for one leaf ticket (a `tracking` ticket or one with open sub-issues is never picked; the last sub-issue's pull request also closes its parent). After the draft pull request it does not poll: it ends the turn with "Draft pull request #N is waiting for CI" and reads `gh pr checks` once when woken. There is no scheduler.
 - **Review gate hook.** [`.claude/hooks/role_gate.py`](.claude/hooks/role_gate.py) blocks `gh pr create` and `gh pr ready` until Code Reviewer and Reality Checker ran after the last code edit. Order: local checks, both gates, `gh pr create --draft`, CI, then `gh pr ready`. `ROLE_GATE=off` in the environment Claude Code is started from switches it off for that session; only the owner does that.
-- **Permissions.** [`.claude/settings.json`](.claude/settings.json): documented commands are allowed; force pushes, pushes to `main`, `gh pr merge`, releases and reads of `.env` are denied; edits to CI, agent configuration and Loop files ask first.
+- **Permissions.** [`.claude/settings.json`](.claude/settings.json): documented commands are allowed; force pushes, pushes to `main`, `gh pr merge`, releases and reads of `.env` are denied; edits to CI, agent configuration (at any depth, so ticket worktrees ask too) and Loop files ask first; changing agent configuration is not part of a ticket.
 - **CI.** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on the draft pull request and must be green before `gh pr ready`; a pull request is never opened or marked ready with a gate not run.
 - **Pull request.** [Template](.github/pull_request_template.md); labels `status:ready`, `status:blocked`, `status:in-progress`, `needs-decision`.
 - **UI and prose.** [docs/ui-quality.md](docs/ui-quality.md) (ten binding rules) with the `ui-ux-pro-max` and `unslop` skills in `.claude/skills/`.

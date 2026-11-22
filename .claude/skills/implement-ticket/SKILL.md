@@ -21,10 +21,10 @@ The project subagents in `.claude/agents/` are part of the work. Delegate to the
 7. **Specialist review.** Run every role in the table "After coding" whose trigger matches the change. For a UI ticket, check every changed screen against the ten rules in `docs/ui-quality.md` and record the result.
 8. **Prose pass.** Run the `unslop` skill over user-facing copy, documentation and the pull request text.
 9. **Changelog.** Add one line for the ticket under `Unreleased` in `CHANGELOG.md`.
-10. **Review gate, always.** Only after the local checks pass with output recorded, run Code Reviewer on the full diff. Fix every material finding, re-run the checks, and have the reviewer look again until no material finding is left.
-11. **Acceptance gate, always.** Run Reality Checker with the ticket's acceptance criteria and the recorded local evidence. It checks that the documented checks ran locally and passed and that CI is configured to run them; it is not asked for a CI result, which does not exist yet. It must pass before the draft pull request.
+10. **Review gate, always.** Only after the local checks pass with output recorded, write `git diff --stat origin/main...HEAD`, `git diff origin/main...HEAD` and the check outputs to `.claude/state/review/` and name those files in the request, then run Code Reviewer on the full diff. Fix every material finding, re-run the checks, and have the reviewer look again until no material finding is left.
+11. **Acceptance gate, always.** Run Reality Checker with the ticket's acceptance criteria and the recorded local evidence (the same review files, refreshed if the diff changed). It checks that the documented checks ran locally and passed and that CI is configured to run them; it is not asked for a CI result, which does not exist yet. It must pass before the draft pull request.
 12. **Hand off.** Capture the evidence `CLAUDE.md` asks for. After local checks passed and both gates passed on the current diff, push the branch and run `gh pr create --draft` with `.github/pull_request_template.md`, naming the issue. When `/next-ticket` started the run, that run is the owner's request to push and open it. Never open it with a gate not run; the review gate hook blocks `gh pr create` and `gh pr ready` otherwise.
-13. **CI.** CI runs on the draft pull request. If it fails, fix, re-run the local checks and both gates, and push. When every CI job is green, run `gh pr ready` (the hook checks the gates again) and comment on the issue with the CI run link. Green CI is checked by you, not by Reality Checker. Only the owner merges; never merge.
+13. **CI.** CI runs on the draft pull request. If it fails, fix, re-run the local checks and both gates, and push. When every CI job is green, run `gh pr ready` (the hook checks the gates again) and comment on the issue with the CI run link. Green CI is checked by you, not by Reality Checker. Do not poll: after the push end the turn with "Draft pull request #N is waiting for CI" and read `gh pr checks <n>` once when woken. Only the owner merges; never merge.
 
 ## Roles
 
@@ -60,6 +60,9 @@ The project subagents in `.claude/agents/` are part of the work. Delegate to the
 ## Rules
 
 - The session or role that wrote a change does not count as its reviewer.
-- Read-only reviewers cannot run commands. Give them the diff, the acceptance criteria and the recorded command output.
+- Read-only reviewers cannot run commands. Write the diff (`git diff --stat origin/main...HEAD`, `git diff origin/main...HEAD`) and the recorded command output to `.claude/state/review/` in the ticket worktree, and name those files with the acceptance criteria in the request.
+- Do not change agent configuration (`.claude/agents`, `.claude/skills`, `.claude/hooks`, `.claude/settings.json`) in a ticket, by editor or by shell command.
+- A ticket labelled `tracking` or with open sub-issues is a container, never work; the pull request of a parent's last open sub-issue also says `Closes #<parent>`.
+- An acceptance step that needs a person ("by hand in a normal browser") is done as far as an agent can (scripted or headless run, with the evidence); the rest goes under "Owner checks" in the pull request, and counts only where the ticket marks the step as manual.
 - Where a role's general advice (frameworks, dependencies, cloud services) conflicts with `CLAUDE.md`, `CLAUDE.md` wins.
 - In the pull request description, add a section "Agent roles run" listing each role that ran, what it was asked and its verdict, and any step you did yourself because a role was missing.

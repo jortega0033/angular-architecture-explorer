@@ -1,6 +1,6 @@
 # Angular Architecture Explorer — PRD and Technical Specification
 
-Package: `architecture_explorer`. Status: baseline implemented; its automated tests are written but not yet observed passing, and the browser demo (AE-C19) is pending. The epic below is future work.
+Package: `architecture_explorer`. Status: baseline implemented and verified on 2026-11-22 (28 automated tests pass; the browser demo AE-C19 was run manually). Commands, results and what remains unverified are in [ARCHITECTURE.md](ARCHITECTURE.md#verification-record). The epic below is future work, tracked as GitHub issue #1 and its children.
 
 Labels used throughout: **[Decision]** fixed, **[Default]** a documented proposal that can change, **[Open]** unresolved.
 
@@ -36,7 +36,7 @@ M1 (baseline, below): search → select → save → restart → reopen on bundl
 
 | ID | Story | Depends on | Status |
 |----|-------|-----------|--------|
-| AE-S0 | Baseline: fixture search, results with path/line/excerpt, saved explorations, restart reopen | — | **Implemented (M1); verification pending** |
+| AE-S0 | Baseline: fixture search, results with path/line/excerpt, saved explorations, restart reopen | — | **Implemented (M1); verified 2026-11-22** |
 | AE-S1 | Bounded snapshot import with canonical paths | AE-S0 | Open |
 | AE-S2 | Incremental versioned index | AE-S1 | Open |
 | AE-S3 | Angular route and static import graph | AE-S2 | Open |
@@ -128,7 +128,7 @@ A local, bounded tokenizer in the standard library that recognizes only `import 
 
 Baseline fixture (4 files): `home.ts` 3 lines, `jobs.ts` 5, `routes.ts` 5, `shared/widget.ts` 3. `jobs.ts` line 2 is `export class JobCardComponent {`, the only occurrence.
 
-Status legend: **Calc** = calculated expectation; **Test** = automated test written (not yet observed to pass); **Demo** = manual demonstration planned.
+Status legend: **Calc** = calculated expectation, no test yet; **Test** = automated test in `tests/` (AE-C01–AE-C18 observed passing on 2026-11-22); **Demo** = manual demonstration (AE-C19 observed on 2026-11-22, without network blocking). See [ARCHITECTURE.md](ARCHITECTURE.md#verification-record).
 
 | ID | Story | Milestone | Check | Expected | Kind |
 |----|-------|-----------|-------|----------|------|
@@ -187,7 +187,7 @@ Open `http://127.0.0.1:8765/`, then:
 Exact commands for the loopback API check: `curl http://127.0.0.1:8765/api/v1/health`.
 
 ## 10. Assumptions and limitations
-- The baseline has not yet been verified by execution; the test suite and browser flow still need to be run.
+- The baseline was verified by execution on Windows with Python 3.13 (test suite and manual browser flow). Not re-verified in that run: Linux, Python 3.12, a browser run with external network blocked, and the accessibility targets in §1.5.
 - Search is case-sensitive and per-line only; no regex, no multi-line matches.
 - Explorations store a query and one selected line; no notes or graph state yet.
 - No deletion, authentication or sharing; single user on one machine.
@@ -195,4 +195,4 @@ Exact commands for the loopback API check: `curl http://127.0.0.1:8765/api/v1/he
 - Chrome on Linux compatibility is a design target, not evidence.
 
 ## 11. Baseline versus work ahead
-Baseline (implemented, verification pending): AE-S0 and checks AE-C01–AE-C19. Ahead: AE-S1–AE-S5, a release integration gate, and AE-C20–AE-C37, tracked in the backlog.
+Baseline (implemented and verified, see the status line at the top): AE-S0 and checks AE-C01–AE-C19. Ahead: AE-S1–AE-S5, a release integration gate, and AE-C20–AE-C37, tracked in GitHub issue #1 (epic) and its child issues #2 to #10 (map in [ARCHITECTURE.md](ARCHITECTURE.md#backlog-map)). Known gaps between this document and the code, including decisions the planned work still needs, are listed in [ARCHITECTURE.md](ARCHITECTURE.md#prd-drift-and-gaps).

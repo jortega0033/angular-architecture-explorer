@@ -21,7 +21,7 @@ python -m architecture_explorer --data-dir ./demo-data --port 8765
 ## Rules
 
 - Standard library only; read-only towards analysed sources; loopback only; no outbound network.
-- Never commit to `main`; one ticket per branch; pull request opened only after the review gates and green CI; the owner merges. See "Delivery workflow" in [CLAUDE.md](CLAUDE.md#delivery-workflow).
+- Never commit to `main`; one ticket per branch; draft pull request opened only after local checks and both review gates, marked ready only on green CI; the owner merges. See "Delivery workflow" in [CLAUDE.md](CLAUDE.md#delivery-workflow).
 - Report only commands you ran and results you saw. Evidence list: [CLAUDE.md](CLAUDE.md#evidence-before-claiming-a-ticket-done).
 
 ## Ticket workflow

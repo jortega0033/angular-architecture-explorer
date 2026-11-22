@@ -48,7 +48,7 @@ Details and line references are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 - **Layering.** `server.py` (HTTP, guards, validation, routing) calls `store.py` (SQLite) and `fixtures.py` (in-memory source index). `store.py` and `fixtures.py` do not import `server.py` or each other. The browser UI in `architecture_explorer/static/` talks only to `/api/v1`.
 - **Request guards stay on every route.** Loopback `Host` with the bound port; same-origin `Origin` on writes; JSON content type; 16 KiB body cap; strict CSP on the HTML page; user and source text rendered with `textContent`, never `innerHTML`.
 - **Storage.** One SQLite connection behind a lock, one explicit transaction per write, optimistic `version` on explorations, `PRAGMA user_version` gate. A schema change needs a version bump and a real migration: today `_init_schema` only handles "empty database to version 1".
-- **Stable contracts.** The endpoints, error codes and limits in `PRD §5`, the startup line `Serving on http://127.0.0.1:<port>`, exit code 2 for a newer schema, and the element ids used by the UI (`#title`, `#query`, `#search-btn`, `#results`, `#save-btn`, `#project-list`, `#status`, `#error`, `#preview`).
+- **Stable contracts.** The endpoints, error codes and limits in `PRD §5`, the startup line `Serving on http://127.0.0.1:<port>`, exit code 2 for a newer schema, and the element ids used by the UI (`#title`, `#query`, `#search-btn`, `#results`, `#result-count`, `#save-btn`, `#new-btn`, `#project-list`, `#status`, `#error`, `#selection-note`, `#preview`). Each result row is a button whose `.loc` span reads `<path>:<line>`, followed by the excerpt.
 - **Regression rule.** Checks `AE-C01`..`AE-C18` stay in the suite and keep passing for every later milestone (`PRD §8`).
 
 ## Git workflow
@@ -76,5 +76,5 @@ If something could not be verified, say so in the pull request instead of markin
 
 ## Agents and the triage loop
 
-- Project agent roles live in `.claude/agents/` (pinned copies from Agency Agents, MIT). The four review roles are read-only (`tools: Read, Grep, Glob`). Selection, provenance and the name-collision note are in [docs/agents-and-loop.md](docs/agents-and-loop.md) and [.claude/agency-agents/README.md](.claude/agency-agents/README.md).
+- Project agent roles live in `.claude/agents/` (pinned copies from Agency Agents, MIT). The five review and audit roles and `loop-verifier` are read-only (`tools: Read, Grep, Glob`). Selection, provenance and the name-collision note are in [docs/agents-and-loop.md](docs/agents-and-loop.md) and [.claude/agency-agents/README.md](.claude/agency-agents/README.md).
 - The Loop Engineering setup is **L1, report-only, manual**: `/issue-triage` may update `issue-triage-state.md` and `loop-run-log.md` and nothing else. No scheduler, no automated fixes, no GitHub writes, no auto-merge. Binding rules are in [loop-constraints.md](loop-constraints.md).

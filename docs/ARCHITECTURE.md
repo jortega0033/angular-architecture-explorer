@@ -110,6 +110,8 @@ Material:
 7. **The index and validation are fixture-specific.** `/api/v1/fixtures/*`, the health field `fixture_files` and the validation message "path is not an indexed fixture file" (`server.py:106`) assume the bundled files. A saved selection has no snapshot identity. The import and index tickets must add that without breaking `AE-C01`..`AE-C18`.
 8. **Schema migration does not exist yet.** `_init_schema` creates the tables only when the stored version is lower than 1 (`store.py:106-117`). The first schema change needs a version bump, an upgrade path from version 1, and a test for it.
 9. **The browser-test tool is undecided.** PRD §4 forbids pip and npm dependencies in the app; a scripted headless-Chrome flow needs either a dev-only tool or a hand-written DevTools client. `.gitignore` already lists `playwright-report/`, `test-results/` and `.venv/`, but nothing in the repository uses them.
+10. **Import limits versus a real project root.** AE-S1 skips non-`.ts` files but says nothing about directories. A real Angular project root contains `node_modules/` with thousands of `.d.ts` files, which end in `.ts` and would exceed the 2,000-file limit at once. The import ticket needs a stated rule for `node_modules` and dot-directories, or a stated expectation that users import `src/`.
+11. **"Path alias" and "bare package" are not distinguishable without a rule.** AE-S4 and AE-C34 name both as diagnostic reasons. Without reading `tsconfig.json` (not a `.ts` file, so not in a snapshot) `@app/x` and `@angular/core` look alike. The graph ticket needs a deterministic, stated rule.
 
 Minor:
 

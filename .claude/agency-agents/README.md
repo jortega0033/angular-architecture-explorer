@@ -28,3 +28,11 @@ Why these roles, how they map to the backlog, and the name-collision note are in
 ## Updating
 
 Pick a new upstream revision, fetch the same paths at that revision, re-apply the `tools` line to the five review and audit roles, update the revision and blob columns here, and verify loading as described in `docs/agents-and-loop.md`.
+
+## Local change: automatic delegation (2026-11-22)
+
+One sentence beginning "Use proactively" was appended to the `description:` line of every Agency Agents role in `.claude/agents/` (not to `loop-verifier`). Claude Code uses that field to decide when to delegate, so the roles now run during ticket work without being named. Nothing else in the role files changed.
+
+This supersedes any statement above that a role file is unmodified or that the `tools:` line is the only local change. To compare a role with the pinned upstream file, remove that sentence (and the `tools:` line where one was added) first.
+
+The steps at which each role runs are in `.claude/skills/implement-ticket/SKILL.md`.

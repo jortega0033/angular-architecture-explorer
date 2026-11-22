@@ -36,3 +36,15 @@ One sentence beginning "Use proactively" was appended to the `description:` line
 This supersedes any statement above that a role file is unmodified or that the `tools:` line is the only local change. To compare a role with the pinned upstream file, remove that sentence (and the `tools:` line where one was added) first.
 
 The steps at which each role runs are in `.claude/skills/implement-ticket/SKILL.md`.
+
+A section headed "In this repository" was also inserted directly after the frontmatter of every Agency Agents role (not in `loop-verifier`), before the upstream text. It is project-specific text written for this repository: the stack and constraints, the files the role owns or reviews, the commands, the invariants with their source documents, the parts of the generic text that do not apply here, and what the role hands back. It is not upstream text. To compare a role with the pinned upstream file, remove that section as well: everything from the line `## In this repository` up to and including the blank line after the sentence "This section and CLAUDE.md override the generic text below wherever they differ." Checked on 2026-11-22 for all nine roles: with the section, the "Use proactively" sentence and any added `tools:` line removed, the file hashes to the upstream blob in the table again. In four roles (Reality Checker, Backend Architect, Frontend Developer, API Tester) the upstream description has no final full stop, so the full stop that was added in front of the sentence has to be removed too.
+
+When updating to a new upstream revision, re-insert each section and check it against the repository as it is then; the sections quote commands, paths and document sections that can change.
+
+Verification, 2026-11-22 (Claude Code 2.1.323, Windows 11), one run from the repository root after the sections were inserted:
+
+```
+claude -p "List every project subagent defined in .claude/agents with its exact name and tools, say for each whether its instructions begin with a section titled In this repository, and say whether a skill named implement-ticket is available. Plain list, no commentary." --model haiku
+```
+
+Exit code 0. The reply listed all nine Agency Agents roles by their exact names and `loop-verifier`. Software Architect, Code Reviewer, Codebase Onboarding Engineer, Reality Checker, Accessibility Auditor and `loop-verifier` were reported with `Read, Grep, Glob`; Backend Architect, Frontend Developer, API Tester and Test Automation Engineer with no `tools` field. All nine roles were reported as beginning with "In this repository"; `loop-verifier` was reported as not, which is intended. The skill `implement-ticket` was reported as available. The reply is the model's reading of the files; no role was launched in this run.

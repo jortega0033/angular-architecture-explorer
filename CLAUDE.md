@@ -76,20 +76,18 @@ If something could not be verified, say so in the pull request instead of markin
 
 ## Agents and the triage loop
 
-- Project agent roles live in `.claude/agents/` (pinned copies from Agency Agents, MIT). The five review and audit roles and `loop-verifier` are read-only (`tools: Read, Grep, Glob`). Selection, provenance and the name-collision note are in [docs/agents-and-loop.md](docs/agents-and-loop.md) and [.claude/agency-agents/README.md](.claude/agency-agents/README.md).
-- The Loop Engineering setup is **L1, report-only, manual**: `/issue-triage` may update `issue-triage-state.md` and `loop-run-log.md` and nothing else. No scheduler, no automated fixes, no GitHub writes, no auto-merge. Binding rules are in [loop-constraints.md](loop-constraints.md).
+**Roles.** Project agent roles live in `.claude/agents/`: nine pinned copies from Agency Agents (MIT) and `loop-verifier`. Each of the nine starts with an "In this repository" section tailored to this project (stack and constraints, files it owns or reviews, commands, invariants, what to hand back). That section and this file override the generic upstream text below it. The five review and audit roles and `loop-verifier` are read-only (`tools: Read, Grep, Glob`): give them the diff, the acceptance criteria and the recorded command output. Selection, provenance, local changes and the name-collision note are in [docs/agents-and-loop.md](docs/agents-and-loop.md) and [.claude/agency-agents/README.md](.claude/agency-agents/README.md).
 
-## Ticket implementation: agent roles run automatically
+**Ticket work.** When asked to implement, continue or finish a GitHub issue, follow the playbook [`.claude/skills/implement-ticket/SKILL.md`](.claude/skills/implement-ticket/SKILL.md). Claude Code loads it on its own for ticket work; `/implement-ticket <issue number>` starts it by hand. Delegate to the roles without waiting to be asked; the "Use proactively ..." sentence that ends each role's `description` is what triggers the delegation.
 
-When asked to implement, continue or finish a GitHub issue, follow the playbook in [`.claude/skills/implement-ticket/SKILL.md`](.claude/skills/implement-ticket/SKILL.md). Claude Code loads it on its own for ticket work; `/implement-ticket <issue number>` starts it by hand.
+| When | Roles |
+|---|---|
+| Before coding | Codebase Onboarding Engineer (unfamiliar area), Software Architect (boundary, schema, API or dependency change) |
+| While coding | The implementing role that matches the files being changed: Backend Architect, Frontend Developer, Test Automation Engineer |
+| After coding, when the change matches | Accessibility Auditor (UI), API Tester (HTTP contract) |
+| Gates on every ticket, whatever its size | Code Reviewer on the full diff, then Reality Checker against the acceptance criteria |
 
-Delegate to the project subagents in `.claude/agents/` without waiting to be asked:
+- The session or role that wrote a change does not count as its reviewer.
+- The pull request description lists the roles that ran and their verdicts under "Agent roles run".
 
-- **Before coding:** Codebase Onboarding Engineer and Software Architect, as their descriptions say.
-- **While coding:** the implementing role that matches the files being changed.
-- **After coding:** each specialist reviewer whose trigger matches the change.
-- **On every ticket, before it is called done:** Code Reviewer, then Reality Checker.
-- The session that wrote a change does not count as its reviewer.
-- List the roles that ran and their verdicts in the pull request description under "Agent roles run".
-
-Each role's `description` ends with a "Use proactively ..." sentence, which is what makes Claude Code delegate to it without being told.
+**Triage loop.** The Loop Engineering setup is **L1, report-only, manual**: `/issue-triage` may update `issue-triage-state.md` and `loop-run-log.md` and nothing else. No scheduler, no automated fixes, no GitHub writes, no auto-merge. Binding rules are in [loop-constraints.md](loop-constraints.md).

@@ -8,7 +8,7 @@ vibe: A flaky test is a bug with your name on it. Deterministic, isolated, fast 
 
 ## In this repository
 
-Angular Architecture Explorer is a Python 3.12+ standard-library web app with a plain JavaScript UI. There is no Node toolchain and no CI. Hard constraints: no pip or npm dependency in the app (`docs/PRD.md` §4); a dev-only browser-test tool needs an explicit decision recorded in its ticket (`CLAUDE.md`, "Architecture boundaries"), and that decision is still open (`docs/ARCHITECTURE.md`, "PRD drift and gaps", gap 9). The app is loopback-only.
+Angular Architecture Explorer is a Python 3.12+ standard-library web app with a plain JavaScript UI. There is no Node toolchain. CI runs the test command on Linux and Windows. Hard constraints: no pip or npm dependency in the app (`docs/PRD.md` §4); a dev-only browser-test tool needs an explicit decision recorded in its ticket (`CLAUDE.md`, "Architecture boundaries"), and that decision is still open (`docs/ARCHITECTURE.md`, "PRD drift and gaps", gap 9). The app is loopback-only.
 
 **Your job here.** You build test infrastructure and write the tests that are not API contract tests: shared helpers such as `tests/helpers.py`, and in epic #1 the table tests of the tokenizer (#8: `AE-C38` and the function-level half of `AE-C31`), the browser harness (#9), the offline end-to-end flow (#6) and the CI workflow (#10). The loopback API tests of #2 to #5 belong to API Tester. The browser journey to automate is `docs/PRD.md` §9: search, select, save, restart, reopen.
 

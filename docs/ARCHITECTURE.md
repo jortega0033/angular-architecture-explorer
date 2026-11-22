@@ -138,7 +138,7 @@ Minor:
 - A write without `Content-Length` returns HTTP 411 with code `bad_request` (`server.py:308-310`); PRD §5 lists `bad_request` only as 400.
 - The 200-exploration list cap (`store.py:11`) and the `Location` header on create (`server.py:336`) are not in PRD §5.
 - PRD §4 does not say that the UI talks only to `/api/v1`.
-- There is no CI, linter or type checker; the README's two-platform claim rests on manual runs.
+- There is no linter or type checker. CI runs the test command on Linux and Windows.
 
 ## Risks for the planned work
 

@@ -8,6 +8,7 @@
 - Don't push before telling me
 - Never auto-merge to main without human approval
 - Always create a draft PR first; let me review before marking ready
+- Applies to loop runs only. Ticket work from `/next-ticket` follows `CLAUDE.md`: the driver opens a draft PR and marks it ready once both gates and CI pass.
 
 ## Paths
 - Never edit .env, .env.*, auth/, payments/, secrets/, credentials/

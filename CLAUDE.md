@@ -53,10 +53,10 @@ Details and line references are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Git workflow
 
-- Default branch `main`. Never commit to it directly; the owner sets branch protection (a pull request and green CI required).
+- Default branch `main`; the owner sets branch protection (a pull request and green CI required).
 - Never commit to `main` directly. Branch from the tip of `origin/main`, one ticket per branch, named `<type>/<issue-number>-<slug>` (for example `feat/2-snapshot-import`).
 - Small commits with a conventional prefix (`feat:`, `fix:`, `docs:`, `test:`, `chore:`), matching the existing history.
-- Open a pull request that references its issue (`Part of epic #1`, `Closes #<n>`), using `.github/pull_request_template.md`. Do not push or open a pull request unless the owner asked in the current session; a `/next-ticket` run counts as that request. The owner reviews and merges; agents never merge, force-push shared branches, publish or deploy.
+- Open a draft pull request that references its issue (`Part of epic #1`, `Closes #<n>`), using `.github/pull_request_template.md`. Do not push or open a pull request unless the owner asked in the current session; a `/next-ticket` run counts as that request. The owner reviews and merges; agents never merge, force-push shared branches, publish or deploy.
 - Do not commit: databases, data directories, `.env*`, `__pycache__/`, `.venv/`, `.prep/` (local planning scaffolding, ignored on purpose), browser test output.
 - Keep documentation changes in the same pull request as the behaviour they describe (PRD §5 for API changes, PRD §8 for new or changed checks, README for user-facing steps).
 
@@ -84,7 +84,7 @@ If something could not be verified, say so in the pull request instead of markin
 | When | Roles |
 |---|---|
 | Before coding | Codebase Onboarding Engineer (unfamiliar area), Software Architect (boundary, schema, API or dependency change) |
-| While coding | The implementing role that matches the files being changed: Backend Architect, Frontend Developer, Test Automation Engineer (tests and test infrastructure, including the tokenizer table tests of #8 and the CI workflow of #10) |
+| While coding | The implementing role that matches the files being changed: Backend Architect, Frontend Developer, Test Automation Engineer (tests and test infrastructure, including the tokenizer table tests of #8 and the CI workflow) |
 | After coding, when the change matches | Accessibility Auditor (UI), API Tester (HTTP contract) |
 | Gates on every ticket, whatever its size | Code Reviewer on the full diff, then Reality Checker against the acceptance criteria |
 

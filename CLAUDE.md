@@ -83,7 +83,7 @@ If something could not be verified, say so in the pull request instead of markin
 | When | Roles |
 |---|---|
 | Before coding | Codebase Onboarding Engineer (unfamiliar area), Software Architect (boundary, schema, API or dependency change) |
-| While coding | The implementing role that matches the files being changed: Backend Architect, Frontend Developer, Test Automation Engineer |
+| While coding | The implementing role that matches the files being changed: Backend Architect, Frontend Developer, Test Automation Engineer (tests and test infrastructure, including the tokenizer table tests of #8 and the CI workflow of #10) |
 | After coding, when the change matches | Accessibility Auditor (UI), API Tester (HTTP contract) |
 | Gates on every ticket, whatever its size | Code Reviewer on the full diff, then Reality Checker against the acceptance criteria |
 

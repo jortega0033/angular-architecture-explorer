@@ -21,17 +21,17 @@ The role definitions in `.claude/agents/` (except `loop-verifier.md`, which come
 | `testing-api-tester.md` | API Tester | `testing/testing-api-tester.md` | `9b9efe53685b250e0c66fd99c71921fd0827355b` | none |
 | `testing-test-automation-engineer.md` | Test Automation Engineer | `testing/testing-test-automation-engineer.md` | `59650291b60ed280f8f5d5da69f15fec2aea3dca` | none |
 
-The only local change is one added frontmatter line, `tools: Read, Grep, Glob`, directly after `description:` in the five review and audit roles. Upstream definitions have no `tools` field, which gives a role every tool; the added line makes those five read-only. The four unchanged files are byte-identical to upstream: `git hash-object --no-filters <file>` equals the blob in the table. For the five changed files, removing the added line gives the upstream blob again.
+As installed, the only local change was one added frontmatter line, `tools: Read, Grep, Glob`, directly after `description:` in the five review and audit roles; two later local changes to all nine files are described below. Upstream definitions have no `tools` field, which gives a role every tool; the added line makes those five read-only. The four files marked "none" were then byte-identical to upstream: `git hash-object --no-filters <file>` equalled the blob in the table. For the other five, removing the added line gave the upstream blob again.
 
 Why these roles, how they map to the backlog, and the name-collision note are in [docs/agents-and-loop.md](../../docs/agents-and-loop.md).
 
 ## Updating
 
-Pick a new upstream revision, fetch the same paths at that revision, re-apply the `tools` line to the five review and audit roles, update the revision and blob columns here, and verify loading as described in `docs/agents-and-loop.md`.
+Pick a new upstream revision, fetch the same paths at that revision, re-apply the three local changes (the `tools` line in the five review and audit roles, and in every role the "Use proactively" sentence at the end of `description:` and the "In this repository" section after the frontmatter, both described below), update the revision and blob columns here, and verify loading as described in `docs/agents-and-loop.md`.
 
 ## Local change: automatic delegation (2026-11-22)
 
-One sentence beginning "Use proactively" was appended to the `description:` line of every Agency Agents role in `.claude/agents/` (not to `loop-verifier`). Claude Code uses that field to decide when to delegate, so the roles now run during ticket work without being named. Nothing else in the role files changed.
+One sentence beginning "Use proactively" was appended to the `description:` line of every Agency Agents role in `.claude/agents/` (not to `loop-verifier`). Claude Code uses that field to decide when to delegate, so the roles now run during ticket work without being named. At that point nothing else in the role files had changed; the "In this repository" sections described further down were inserted afterwards.
 
 This supersedes any statement above that a role file is unmodified or that the `tools:` line is the only local change. To compare a role with the pinned upstream file, remove that sentence (and the `tools:` line where one was added) first.
 

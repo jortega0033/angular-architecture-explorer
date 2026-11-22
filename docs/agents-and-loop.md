@@ -15,8 +15,8 @@ Nine role definitions from Agency Agents are installed in `.claude/agents/`. Pin
 | Accessibility Auditor | Read, Grep, Glob | Auditing the UI source (`index.html`, `app.css`, `app.js`) against the PRD §1.5 targets (labels, focus, keyboard, live regions, contrast, 800x600), and judging browser evidence that an implementer or the browser harness supplies | UI changes, #6, #7 |
 | Backend Architect | all | Implementing `server.py`, `store.py`, import, index, tokenizer and graph code | #2, #3, #4, #5, #8 |
 | Frontend Developer | all | Implementing the plain HTML, CSS and JavaScript UI in `architecture_explorer/static/` | #2 to #5 UI parts |
-| API Tester | all | Writing `unittest` API tests against real loopback servers, and the table tests of the tokenizer | #2 to #5, #8 |
-| Test Automation Engineer | all | The browser harness, the scripted headless-Chrome flow and the CI workflow | #9, #6, #10 |
+| API Tester | all | Writing `unittest` API tests against real loopback servers | #2 to #5 |
+| Test Automation Engineer | all | The table tests of the tokenizer, the browser harness, the scripted headless-Chrome flow and the CI workflow | #8, #9, #6, #10 |
 
 The five review and audit roles (the first five rows) are read-only: they cannot edit files or run commands, so they report findings and somebody else acts on them. Upstream definitions carry no `tools` field; the line `tools: Read, Grep, Glob` was added here. The other four roles write code or tests and keep every tool.
 

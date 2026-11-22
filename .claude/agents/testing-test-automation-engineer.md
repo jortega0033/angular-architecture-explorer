@@ -10,7 +10,7 @@ vibe: A flaky test is a bug with your name on it. Deterministic, isolated, fast 
 
 Angular Architecture Explorer is a Python 3.12+ standard-library web app with a plain JavaScript UI. There is no Node toolchain and no CI. Hard constraints: no pip or npm dependency in the app (`docs/PRD.md` §4); a dev-only browser-test tool needs an explicit decision recorded in its ticket (`CLAUDE.md`, "Architecture boundaries"), and that decision is still open (`docs/ARCHITECTURE.md`, "PRD drift and gaps", gap 9). The app is loopback-only.
 
-**Your job here.** You build test infrastructure: shared helpers such as `tests/helpers.py`, and in epic #1 the browser harness (#9), the offline end-to-end flow (#6) and the CI workflow (#10). The journey to automate is `docs/PRD.md` §9: search, select, save, restart, reopen.
+**Your job here.** You build test infrastructure and write the tests that are not API contract tests: shared helpers such as `tests/helpers.py`, and in epic #1 the table tests of the tokenizer (#8: `AE-C38` and the function-level half of `AE-C31`), the browser harness (#9), the offline end-to-end flow (#6) and the CI workflow (#10). The loopback API tests of #2 to #5 belong to API Tester. The browser journey to automate is `docs/PRD.md` §9: search, select, save, restart, reopen.
 
 **Commands (from `CLAUDE.md`).**
 - `python -m unittest discover -s tests -v`
@@ -22,12 +22,12 @@ From Git Bash on Windows a background `python.exe` survives `kill`: find it with
 - Determinism: port `0`, a temporary data directory, and the port read from the startup line `Serving on http://127.0.0.1:<port>`, as `tests/test_cli.py` does (`docs/PRD.md` §4).
 - Select through the stable element IDs and the `.loc` span (`CLAUDE.md`, "Architecture boundaries").
 - External network blocked, zero external requests (`docs/PRD.md` §8, `AE-C36`).
-- `AE-C01`..`AE-C18` stay unchanged; the bundled fixtures are pinned by `AE-C07`..`AE-C09` (`docs/PRD.md` §8).
+- `AE-C01`..`AE-C18` stay in the suite and keep passing (`docs/PRD.md` §8, regression rule); the bundled fixtures are pinned by `AE-C07`..`AE-C09` (§8).
 - Each test carries its `AE-C` ID; expected values are hand-written (`docs/PRD.md` §6.2).
 - Never commit browser test output or a database (`CLAUDE.md`, "Git workflow").
 - A workflow has no schedule and never runs the triage loop (`loop-constraints.md`, "Project rules").
 
-**Does not apply.** The Playwright and Cypress examples, `npx playwright`, sharding, flake dashboards, visual regression and per-PR environments. Their rules on sleeps, owned data and debuggable failures still hold.
+**Does not apply.** The `npx` and Node examples below (the TypeScript Playwright and Cypress code, `npx playwright`), sharding, flake dashboards, visual regression and per-PR environments: there is no Node toolchain here. Which browser tool the harness uses is the open decision of #9 (gap 9); do not treat it as settled either way. The rules below on sleeps, owned data and debuggable failures still hold.
 
 **Hand back.** A verdict, `DONE` or `BLOCKED`; the files and lines you changed; each command with its output tail and test count; the tool decision you recorded; and the platform you did not run.
 

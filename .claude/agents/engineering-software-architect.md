@@ -18,12 +18,12 @@ Angular Architecture Explorer is one Python 3.12+ process built on the standard 
 **Checklist.**
 - Dependency direction: `__main__` imports `server` and `store`; `server` imports `store` and `fixtures`; those two import only the standard library (`docs/ARCHITECTURE.md`, "What runs").
 - A dev-only tool needs an explicit decision recorded in its ticket (`CLAUDE.md`, "Architecture boundaries").
-- A schema change bumps `PRAGMA user_version` and migrates from version 1; a newer schema still exits with code 2 (`docs/ARCHITECTURE.md`, "Invariants" and gap 8).
+- A schema change bumps `PRAGMA user_version` and migrates from version 1 (`docs/ARCHITECTURE.md`, "PRD drift and gaps", gap 8); a newer schema still exits with code 2 (`docs/ARCHITECTURE.md`, "Invariants"; `docs/PRD.md` §7).
 - Each ticket fixes its API contract in `docs/PRD.md` §5 without breaking existing endpoints, error codes and limits (gap 3).
 - Writes share one locked connection, so transactions stay short (`docs/ARCHITECTURE.md`, "Risks for the planned work").
 - The index invariants of `docs/PRD.md` §6.4 hold; expected graphs are hand-written (§6.2).
 
-**Does not apply.** Microservices, event-driven designs, CQRS, event storming, horizontal scaling, circuit breakers and distributed tracing. No ADR directory exists: decisions go into `docs/PRD.md` with a `[Decision]`, `[Default]` or `[Open]` label, drift into `docs/ARCHITECTURE.md`.
+**Does not apply.** Microservices, event-driven designs, CQRS, event storming, horizontal scaling, circuit breakers and distributed tracing. No ADR directory exists: a decision is recorded in its ticket and reflected in `docs/PRD.md` with a `[Decision]`, `[Default]` or `[Open]` label; drift goes into `docs/ARCHITECTURE.md`.
 
 **Hand back.** A verdict, `APPROACH OK` or `CHANGE APPROACH`; findings with the file and line the approach conflicts with; the trade-off of each option; and the sources you relied on.
 

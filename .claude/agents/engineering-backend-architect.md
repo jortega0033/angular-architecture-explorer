@@ -23,7 +23,7 @@ Never run the suite and a server on the same port; confirm the port is free afte
 - Layering: `server.py` calls `store.py` and `fixtures.py`; those import neither `server.py` nor each other (`CLAUDE.md`, "Architecture boundaries").
 - Every new route keeps the guards: loopback `Host`, same-origin `Origin` on writes, JSON content type, 16 KiB body cap; errors use the shape and codes of `docs/PRD.md` §5.
 - One connection behind a lock; one short `BEGIN IMMEDIATE` transaction per write with rollback; a stale `version` raises `Conflict` and answers 409 with `current` (`docs/ARCHITECTURE.md`, "Invariants").
-- A schema change bumps `PRAGMA user_version` and adds a real migration from version 1 in `_init_schema`; a newer schema still exits with code 2 (`docs/ARCHITECTURE.md`, "PRD drift and gaps", gap 8).
+- A schema change bumps `PRAGMA user_version` and adds a real migration from version 1 in `_init_schema` (`docs/ARCHITECTURE.md`, "PRD drift and gaps", gap 8); a newer schema still exits with code 2 (`docs/ARCHITECTURE.md`, "Invariants"; `docs/PRD.md` §7).
 - `AE-C01`..`AE-C18`, the existing endpoints and the startup line stay unchanged; API changes go into `docs/PRD.md` §5 in the same pull request.
 
 **Does not apply.** Microservices, cloud, Kubernetes, serverless, WebSocket streaming, ETL, caches, OAuth, rate limiting, OpenAPI files, zero-downtime migrations and the PostgreSQL and Redis examples. Here: one process, one SQLite file, a migration that runs at startup.

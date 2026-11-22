@@ -2,7 +2,7 @@
 
 Instructions for coding agents. The full version is [CLAUDE.md](CLAUDE.md); this file repeats only what an agent must know before running anything.
 
-This is a Python standard-library project (Python 3.12+). There is no Node toolchain, no `package.json`, no pip dependency, no linter and no CI.
+This is a Python standard-library project (Python 3.12+). There is no Node toolchain, no `package.json`, no pip dependency, no linter. CI runs the test command on Linux and Windows.
 
 ## Test commands
 
@@ -21,7 +21,7 @@ python -m architecture_explorer --data-dir ./demo-data --port 8765
 ## Rules
 
 - Standard library only; read-only towards analysed sources; loopback only; no outbound network.
-- Never commit to `main`; one ticket per branch; draft pull request; the owner merges.
+- Never commit to `main`; one ticket per branch; pull request opened only after the review gates and green CI; the owner merges. See "Delivery workflow" in [CLAUDE.md](CLAUDE.md#delivery-workflow).
 - Report only commands you ran and results you saw. Evidence list: [CLAUDE.md](CLAUDE.md#evidence-before-claiming-a-ticket-done).
 
 ## Ticket workflow

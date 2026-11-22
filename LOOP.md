@@ -14,6 +14,7 @@ Repository: `jortega0033/angular-architecture-explorer`. Scaffolded with `@cobus
 - A run never edits source, tests or docs, never labels, comments on, closes or creates issues or pull requests, never pushes and never merges.
 - No scheduler is configured: no `/loop` cadence, no cron, no scheduled GitHub Actions workflow and no workflow that runs the loop. Do not add one without the owner's decision. An ordinary CI workflow that only runs the test suite on pull requests and pushes (the epic has a ticket for one, #10) is not a scheduler and is not what this rule forbids.
 - Sub-agent spawns per run: 0. The `loop-verifier` agent is installed for a possible later level and is not used at L1. It is read-only (`tools: Read, Grep, Glob`), so it cannot run the test suite.
+- Ticket work is not a loop run. It is started by the owner with `/next-ticket` and governed by `CLAUDE.md`, the `implement-ticket` playbook, the review gate hook, CI and branch protection. The loop stays at L1: report-only and unscheduled.
 - Moving to L2 (applying allowlisted labels) is the owner's decision and needs an edit to this file, `loop-budget.md` and `loop-constraints.md`.
 - Any level at which a checker must run tests also needs the owner's decision to grant `loop-verifier` a test runner (an edit to `.claude/agents/loop-verifier.md`). Until then it reports ESCALATE_HUMAN for test evidence.
 

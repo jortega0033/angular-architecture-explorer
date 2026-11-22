@@ -34,7 +34,7 @@ There is no install step. Use `python` (Windows) or `python3` (Linux, when `pyth
 Notes that save time:
 
 - The suite starts real loopback servers on ephemeral ports with temporary data directories. It needs no network and leaves nothing behind. `tests/test_cli.py` spawns `python -m architecture_explorer` as a subprocess.
-- There is no linter, formatter, type checker or CI configured. Do not claim any of them ran.
+- There is no linter, formatter or type checker. CI runs the test command above (see "Delivery workflow"). Do not claim a check ran that you did not see run.
 - Stop a foreground server with Ctrl+C. If you start it in the background from Git Bash on Windows, `kill` on the shell job does not stop `python.exe`; find the listener with `netstat -ano | grep :<port>` and stop it with `taskkill //PID <pid> //F`. Always confirm the port is free afterwards.
 - Use a data directory that is ignored by Git: `./demo-data` (its `*.sqlite*` files are ignored), `./data`, or a temporary directory. Never commit a database.
 - One check at a time: do not run the suite and a server on the same port in parallel.
@@ -53,10 +53,10 @@ Details and line references are in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Git workflow
 
-- Default branch `main`. It has no branch protection and no CI, so discipline is manual.
+- Default branch `main`. Never commit to it directly; the owner sets branch protection (a pull request and green CI required).
 - Never commit to `main` directly. Branch from the tip of `origin/main`, one ticket per branch, named `<type>/<issue-number>-<slug>` (for example `feat/2-snapshot-import`).
 - Small commits with a conventional prefix (`feat:`, `fix:`, `docs:`, `test:`, `chore:`), matching the existing history.
-- Open a draft pull request that references its issue (`Part of epic #1`, `Closes #<n>`). The owner reviews and merges; agents never merge, force-push shared branches, publish or deploy.
+- Open a pull request that references its issue (`Part of epic #1`, `Closes #<n>`), using `.github/pull_request_template.md`. Do not push or open a pull request unless the owner asked in the current session; a `/next-ticket` run counts as that request. The owner reviews and merges; agents never merge, force-push shared branches, publish or deploy.
 - Do not commit: databases, data directories, `.env*`, `__pycache__/`, `.venv/`, `.prep/` (local planning scaffolding, ignored on purpose), browser test output.
 - Keep documentation changes in the same pull request as the behaviour they describe (PRD §5 for API changes, PRD §8 for new or changed checks, README for user-facing steps).
 
@@ -71,6 +71,7 @@ Report only what you ran and saw. For every ticket, the pull request description
 5. For storage changes: proof of restart survival (stop the server, start it on the same `--data-dir`, read the data back) and of the upgrade path from a version-1 database.
 6. Platform: operating system and Python version. Say which of Windows and Linux was not run.
 7. `git status --short` is clean and the diff touches only files in the ticket's scope.
+8. CI is green on the pull request (`gh pr checks`).
 
 If something could not be verified, say so in the pull request instead of marking the criterion done.
 
@@ -91,3 +92,16 @@ If something could not be verified, say so in the pull request instead of markin
 - The pull request description lists the roles that ran and their verdicts under "Agent roles run".
 
 **Triage loop.** The Loop Engineering setup is **L1, report-only, manual**: `/issue-triage` may update `issue-triage-state.md` and `loop-run-log.md` and nothing else. No scheduler, no automated fixes, no GitHub writes, no auto-merge. Binding rules are in [loop-constraints.md](loop-constraints.md).
+
+## Delivery workflow
+
+How a ticket gets from the backlog to a pull request. Each piece is defined in its own file; this part only links them.
+
+- **Start and playbook.** The owner starts a ticket with `/next-ticket` ([skill](.claude/skills/next-ticket/SKILL.md)), which is the go signal and runs the [`implement-ticket`](.claude/skills/implement-ticket/SKILL.md) playbook for one ticket. There is no scheduler.
+- **Review gate hook.** [`.claude/hooks/role_gate.py`](.claude/hooks/role_gate.py) blocks `gh pr create` and `gh pr ready` until Code Reviewer and Reality Checker ran after the last code edit. `ROLE_GATE=off` in the environment Claude Code is started from switches it off for that session; only the owner does that.
+- **Permissions.** [`.claude/settings.json`](.claude/settings.json): documented commands are allowed; force pushes, pushes to `main`, `gh pr merge`, releases and reads of `.env` are denied; edits to CI, agent configuration and Loop files ask first.
+- **CI.** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) must be green before a pull request is marked ready.
+- **Pull request.** [Template](.github/pull_request_template.md); labels `status:ready`, `status:blocked`, `status:in-progress`, `needs-decision`.
+- **UI and prose.** [docs/ui-quality.md](docs/ui-quality.md) (ten binding rules) with the `ui-ux-pro-max` and `unslop` skills in `.claude/skills/`.
+- **Changelog.** Every ticket pull request adds one line to [CHANGELOG.md](CHANGELOG.md).
+- **Decisions and releases.** [docs/owner-decisions.md](docs/owner-decisions.md) records the owner's decisions; [docs/RELEASING.md](docs/RELEASING.md) the release steps; [SECURITY.md](SECURITY.md) how to report a vulnerability. Only the owner merges and releases.

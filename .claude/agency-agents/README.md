@@ -48,3 +48,11 @@ claude -p "List every project subagent defined in .claude/agents with its exact 
 ```
 
 Exit code 0. The reply listed all nine Agency Agents roles by their exact names and `loop-verifier`. Software Architect, Code Reviewer, Codebase Onboarding Engineer, Reality Checker, Accessibility Auditor and `loop-verifier` were reported with `Read, Grep, Glob`; Backend Architect, Frontend Developer, API Tester and Test Automation Engineer with no `tools` field. All nine roles were reported as beginning with "In this repository"; `loop-verifier` was reported as not, which is intended. The skill `implement-ticket` was reported as available. The reply is the model's reading of the files; no role was launched in this run.
+
+## Local change: SDLC kit (2026-11-22)
+
+This pass added, without touching any role text outside the "In this repository" sections:
+
+- One checklist line naming `docs/ui-quality.md` in the "In this repository" section of Frontend Developer, Accessibility Auditor and Code Reviewer. UI Designer and UX Architect are not installed here. The line sits inside the inserted section, so the "remove the section and compare with upstream" check above still applies.
+- The review gate hook `.claude/hooks/role_gate.py` with `GATE_ROLES = ["Code Reviewer", "Reality Checker"]`, wired in `.claude/settings.json`; both roles are installed.
+- The `next-ticket` driver and the `ui-ux-pro-max` and `unslop` skills in `.claude/skills/` (each with a `PROVENANCE.md`), CI, the pull request and issue templates, `docs/ui-quality.md` and `docs/owner-decisions.md`.

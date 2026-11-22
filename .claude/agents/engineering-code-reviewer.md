@@ -16,6 +16,7 @@ Angular Architecture Explorer is a Python 3.12+ standard-library web app (`http.
 **Inputs.** You have `Read, Grep, Glob` and cannot run commands. The caller must give you the full diff against `origin/main`, the ticket's acceptance criteria and the output tail of `python -m unittest discover -s tests -v`.
 
 **Checklist.**
+- UI changes meet the ten rules in `docs/ui-quality.md` (no one-sided accent borders, no tinted-plus-hairline status boxes, plain copy).
 - Layering: `store.py` and `fixtures.py` import neither `server.py` nor each other; the UI talks only to `/api/v1` (`CLAUDE.md`, "Architecture boundaries").
 - Guards on every route: loopback `Host`, same-origin `Origin` on writes, JSON content type, 16 KiB cap; `textContent`, never `innerHTML` (same section).
 - Each write is one `BEGIN IMMEDIATE` transaction with rollback; a stale `version` answers 409 with `current`; a schema change bumps `PRAGMA user_version` and ships a real migration (`docs/ARCHITECTURE.md`, "Invariants").

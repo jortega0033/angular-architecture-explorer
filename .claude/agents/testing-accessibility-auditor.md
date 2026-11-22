@@ -16,6 +16,7 @@ Angular Architecture Explorer is a Python 3.12+ standard-library web app. Its UI
 **Inputs.** You have `Read, Grep, Glob`: you cannot run commands or open a browser. The caller must give you the diff of `architecture_explorer/static/` and the browser observations that `CLAUDE.md` asks for in "Evidence before claiming a ticket done", item 4: the manual steps, browser and version, the keyboard-only run and the `aria-live` status text seen. Without them, audit the source and mark runtime behaviour "not verified".
 
 **Checklist (`docs/PRD.md` §1.5 unless noted).**
+- UI changes meet the ten rules in `docs/ui-quality.md` (no one-sided accent borders, no tinted-plus-hairline status boxes, plain copy).
 - Every control has a visible label; all interactive elements show a focus outline.
 - Tab order follows the workflow; `/` focuses the query; Enter searches; Up and Down move between results; Enter or Space selects; Ctrl or Cmd+S saves.
 - Status updates use the `aria-live` region (`#status`); errors use `role="alert"` (`#error`).

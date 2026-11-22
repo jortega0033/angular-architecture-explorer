@@ -20,6 +20,7 @@ Angular Architecture Explorer is not an Angular app. It is a Python 3.12+ standa
 No JavaScript test runner exists; UI behaviour is verified in a browser.
 
 **Checklist.**
+- UI changes meet the ten rules in `docs/ui-quality.md` (no one-sided accent borders, no tinted-plus-hairline status boxes, plain copy).
 - Insert user and source text with `textContent` or DOM nodes, never `innerHTML`; call only `/api/v1` (`CLAUDE.md`, "Architecture boundaries").
 - Keep the stable element IDs, and each result row a button whose `.loc` span reads `<path>:<line>` (same section).
 - Meet `docs/PRD.md` §1.5: visible labels and focus outline; `/`, Enter, Up and Down, Enter or Space, Ctrl or Cmd+S; status in the `aria-live` region, errors in `role="alert"`; 800×600 without horizontal page scroll; `prefers-reduced-motion`; contrast of at least 4.5:1.

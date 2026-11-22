@@ -97,6 +97,26 @@ UI (`static/app.js`): all dynamic text is inserted with `textContent` or DOM nod
 
 Check IDs: `AE-C01`..`AE-C17` are tagged in comments in `tests/test_api.py`; `tests/test_cli.py` covers `AE-C16` and `AE-C18`. `AE-C19` is a manual demo. `AE-C20`..`AE-C37` have no code or tests.
 
+## Backlog map
+
+The planned work is epic [#1](https://github.com/jortega0033/angular-architecture-explorer/issues/1). Its nine child issues are linked to it as GitHub sub-issues. Outcome, scope, acceptance criteria, verification and the effort range of each ticket are in the issue itself; this table only maps them to the PRD and to the gaps listed in the next section.
+
+| Order | Issue | PRD story | Depends on | Gaps it settles |
+|---|---|---|---|---|
+| 1 | [#2](https://github.com/jortega0033/angular-architecture-explorer/issues/2) Bounded snapshot import with canonical paths | AE-S1 | none | 3 (import and snapshot API), 4, 8, 10 |
+| 2 | [#8](https://github.com/jortega0033/angular-architecture-explorer/issues/8) Import-statement tokenizer (pure function) | parser half of AE-S3 | none | 6 (records `component:` references) |
+| 3 | [#9](https://github.com/jortega0033/angular-architecture-explorer/issues/9) Browser harness for the baseline demo | automates AE-C19, groundwork for AE-S5 | none | 9 |
+| 4 | [#10](https://github.com/jortega0033/angular-architecture-explorer/issues/10) CI for the unit suite | none (enforces the regression rule of §8) | none | minor: no CI |
+| 5 | [#3](https://github.com/jortega0033/angular-architecture-explorer/issues/3) Incremental versioned index | AE-S2 | #2 | 5 (index half), 7 |
+| 6 | [#4](https://github.com/jortega0033/angular-architecture-explorer/issues/4) Angular route and static import graph | AE-S3 | #3, #8 | 3 (graph API), 5 (edge half), 6, 11 |
+| 7 | [#5](https://github.com/jortega0033/angular-architecture-explorer/issues/5) Trace and unresolved diagnostics | AE-S4 | #4 | 3 (trace and diagnostics API) |
+| 8 | [#6](https://github.com/jortega0033/angular-architecture-explorer/issues/6) Offline end-to-end browser flow | AE-S5 | #5, #9 | none |
+| 9 | [#7](https://github.com/jortega0033/angular-architecture-explorer/issues/7) Release integration gate | AE-REL | all of the above | document reconciliation |
+
+#2, #8, #9 and #10 have no prerequisite and can start in parallel. #2 → #3 → #4 → #5 is serial because each step changes the SQLite schema and `server.py`. Join points: #4 needs #3 and #8; #6 needs #5 and #9; #7 needs everything.
+
+The tickets add four check IDs that PRD §8 does not list yet: `AE-C38` (tokenizer positives, #8), `AE-C39` (schema upgrade path, #2, extended in #3 and #4), `AE-C40` (no import dropped, #5) and `AE-C41` (CI matrix, #10). Each is added to §8 by the ticket that implements it.
+
 ## PRD drift and gaps
 
 Material:

@@ -12,7 +12,7 @@ Repository: `jortega0033/angular-architecture-explorer`. Scaffolded with `@cobus
 
 - A run may read issues with `gh` and may change only `issue-triage-state.md` and `loop-run-log.md`.
 - A run never edits source, tests or docs, never labels, comments on, closes or creates issues or pull requests, never pushes and never merges.
-- No scheduler is configured: no `/loop` cadence, no cron, no scheduled GitHub Actions workflow and no workflow that runs the loop. Do not add one without the owner's decision. An ordinary CI workflow that only runs the test suite on pull requests and pushes (the epic has a ticket for one) is not a scheduler and is not what this rule forbids.
+- No scheduler is configured: no `/loop` cadence, no cron, no scheduled GitHub Actions workflow and no workflow that runs the loop. Do not add one without the owner's decision. An ordinary CI workflow that only runs the test suite on pull requests and pushes (the epic has a ticket for one, #10) is not a scheduler and is not what this rule forbids.
 - Sub-agent spawns per run: 0. The `loop-verifier` agent is installed for a possible later level and is not used at L1. It is read-only (`tools: Read, Grep, Glob`), so it cannot run the test suite.
 - Moving to L2 (applying allowlisted labels) is the owner's decision and needs an edit to this file, `loop-budget.md` and `loop-constraints.md`.
 - Any level at which a checker must run tests also needs the owner's decision to grant `loop-verifier` a test runner (an edit to `.claude/agents/loop-verifier.md`). Until then it reports ESCALATE_HUMAN for test evidence.
@@ -28,7 +28,7 @@ Repository: `jortega0033/angular-architecture-explorer`. Scaffolded with `@cobus
 ## Inputs for a run
 
 - Open issues: `gh issue list -R jortega0033/angular-architecture-explorer --state open --json number,title,labels,updatedAt,body`
-- The epic and its order: issue #1
+- The epic and its order: issue #1; its child issues are #2 to #10, linked as sub-issues (map in `docs/ARCHITECTURE.md`, section "Backlog map")
 - Sources of truth: `docs/PRD.md`, `docs/ARCHITECTURE.md`, `CLAUDE.md`
 - Previous state: `issue-triage-state.md`
 

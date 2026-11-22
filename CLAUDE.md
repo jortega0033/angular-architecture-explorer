@@ -15,7 +15,7 @@ Today it searches four bundled synthetic `.ts` fixtures and saves explorations. 
 | Product scope, API summary (§5), invariants (§6), check IDs `AE-C01`..`AE-C37` (§8) | [docs/PRD.md](docs/PRD.md) |
 | Traced workflow, module boundaries, invariants with source lines, implemented / planned / needs-verification status, PRD drift | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
 | Run, test and demo steps for users | [README.md](README.md) |
-| Backlog | GitHub issues: epic #1 and its children. The PRD's "backlog" means these issues. |
+| Backlog | GitHub issues: epic #1 and its child issues #2 to #10 (linked as sub-issues; order and dependencies in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#backlog-map)). The PRD's "backlog" means these issues. |
 | Agent roles and the triage loop | [docs/agents-and-loop.md](docs/agents-and-loop.md), [LOOP.md](LOOP.md) |
 
 If code and a document disagree, the code and its tests describe current behaviour; fix the document in the same pull request or record the drift in `docs/ARCHITECTURE.md`.

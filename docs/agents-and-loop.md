@@ -8,15 +8,15 @@ Nine role definitions from Agency Agents are installed in `.claude/agents/`. Pin
 
 | Role (`name`) | Tools | Use it for | Tickets |
 |---|---|---|---|
-| Software Architect | Read, Grep, Glob | Reviewing a design before code: snapshot storage, migration, the API contract for new endpoints, the edge classification rule | #2, #3, #4, #5 |
+| Software Architect | Read, Grep, Glob | Reviewing a design before code: snapshot storage, migration, the API contract for new endpoints, the edge classification rule, the browser-tool decision | #2, #3, #4, #5, #9 |
 | Code Reviewer | Read, Grep, Glob | Reviewing a diff for correctness, guards, transaction boundaries and scope | every pull request |
 | Codebase Onboarding Engineer | Read, Grep, Glob | Tracing a code path with source lines before changing it | first contact with a module |
 | Reality Checker | Read, Grep, Glob | Checking a "done" claim against the evidence list in `CLAUDE.md` | every pull request, #7 |
 | Accessibility Auditor | Read, Grep, Glob | Auditing the UI source (`index.html`, `app.css`, `app.js`) against the PRD §1.5 targets (labels, focus, keyboard, live regions, contrast, 800x600), and judging browser evidence that an implementer or the browser harness supplies | UI changes, #6, #7 |
-| Backend Architect | all | Implementing `server.py`, `store.py`, import, index and graph code | #2, #3, #4, #5 |
+| Backend Architect | all | Implementing `server.py`, `store.py`, import, index, tokenizer and graph code | #2, #3, #4, #5, #8 |
 | Frontend Developer | all | Implementing the plain HTML, CSS and JavaScript UI in `architecture_explorer/static/` | #2 to #5 UI parts |
-| API Tester | all | Writing `unittest` API tests against real loopback servers | #2 to #5 |
-| Test Automation Engineer | all | The scripted headless-Chrome flow | #6 |
+| API Tester | all | Writing `unittest` API tests against real loopback servers, and the table tests of the tokenizer | #2 to #5, #8 |
+| Test Automation Engineer | all | The browser harness, the scripted headless-Chrome flow and the CI workflow | #9, #6, #10 |
 
 The five review and audit roles (the first five rows) are read-only: they cannot edit files or run commands, so they report findings and somebody else acts on them. Upstream definitions carry no `tools` field; the line `tools: Read, Grep, Glob` was added here. The other four roles write code or tests and keep every tool.
 
@@ -108,7 +108,7 @@ Notes:
   Next: Schedule a report-only first run and append loop-run-log.md
 ```
 
-Reading these results: "100/100 L2" is the tool's structural readiness score, not the operating level. The operating level documented here stays L1. The three "next actions" and the tool's suggestion to schedule a run were deliberately not followed: no scheduler and no workflow that runs the loop. (The epic has a separate ticket for an ordinary test workflow on pull requests; it has no schedule and does not run the loop.)
+Reading these results: "100/100 L2" is the tool's structural readiness score, not the operating level. The operating level documented here stays L1. The three "next actions" and the tool's suggestion to schedule a run were deliberately not followed: no scheduler and no workflow that runs the loop. (The epic has a separate ticket, #10, for an ordinary test workflow on pull requests; it has no schedule and does not run the loop.)
 
 `doctor` was run once more on 2026-11-22 after `tools: Read, Grep, Glob` was added to `loop-verifier.md` and the wording fixes in `LOOP.md` and `loop-constraints.md`: exit 0, `Status: HEALTHY`, same file line, same three next actions, same note. The first line changed to:
 

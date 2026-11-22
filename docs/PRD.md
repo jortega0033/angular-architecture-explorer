@@ -195,4 +195,4 @@ Exact commands for the loopback API check: `curl http://127.0.0.1:8765/api/v1/he
 - Chrome on Linux compatibility is a design target, not evidence.
 
 ## 11. Baseline versus work ahead
-Baseline (implemented and verified, see the status line at the top): AE-S0 and checks AE-C01–AE-C19. Ahead: AE-S1–AE-S5, a release integration gate, and AE-C20–AE-C37, tracked in GitHub issue #1 (epic) and its child issues. Known gaps between this document and the code, including decisions the planned work still needs, are listed in [ARCHITECTURE.md](ARCHITECTURE.md#prd-drift-and-gaps).
+Baseline (implemented and verified, see the status line at the top): AE-S0 and checks AE-C01–AE-C19. Ahead: AE-S1–AE-S5, a release integration gate, and AE-C20–AE-C37, tracked in GitHub issue #1 (epic) and its child issues #2 to #10 (map in [ARCHITECTURE.md](ARCHITECTURE.md#backlog-map)). Known gaps between this document and the code, including decisions the planned work still needs, are listed in [ARCHITECTURE.md](ARCHITECTURE.md#prd-drift-and-gaps).

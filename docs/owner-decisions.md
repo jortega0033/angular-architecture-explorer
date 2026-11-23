@@ -16,8 +16,22 @@ Decisions the owner made for this repository on 2026-11-22. Changing any entry n
 | 10 | Open decisions on tickets are settled with the ticket's stated default (list below). | 2026-11-22 | The tickets, `.claude/skills/next-ticket/SKILL.md` |
 | 12 | The ten UI rules in `docs/ui-quality.md` are binding, and the `ui-ux-pro-max` and `unslop` skills are installed and used for UI work and for copy. | 2026-11-22 | `docs/ui-quality.md`, `.claude/skills/ui-ux-pro-max/`, `.claude/skills/unslop/`, `.claude/skills/implement-ticket/SKILL.md` |
 | 13 | Visual system: Pipenzo Flow look tokens (docs/design-tokens.md). SDLC kit version: jortega0033/sdlc-kit v1.0.0. | 2026-11-23 | `architecture_explorer/static/tokens.css`, `docs/design-tokens.md` |
+| 14 | Accent, focus and theme rules for the UI: D1 current selection uses the accent, D2 focus ring exempt, D3 contrast checks cover both themes. Sources are listed under "Entry 14" below. | 2026-11-23 | `docs/design-tokens.md`, `docs/ui-quality.md` |
 
 Entry 11 of the kit (Rust verified in CI only) does not apply: this repository has no Rust.
+
+## Entry 14: sources of the accent, focus and theme rules (2026-11-23)
+
+Written into `docs/design-tokens.md`. Sources are given as stated.
+
+| Id | Decision | Source |
+|---|---|---|
+| D1 | Current selection: the yellow accent is used for the primary action, the current-step marker and the current selection (UI rule 8). | Decided by the owner on 2026-11-23. |
+| D1 (how) | A selection uses a solid `--primary` fill with `--on-primary` text (not only a yellow border, which has about 1.5:1 against white on light), plus a second sign that is not colour (weight, icon or text) and the existing aria attribute. Never a tint with a same-hue border and never a thick one-sided border. | Recommended by the orchestrator, adopted under the owner's delegation of the same day. |
+| D2 | Focus ring: `--focus` is a focus indicator, exempt from the accent limit, including where it is yellow in dark. A ticket that says the focus style stays unchanged means the rule on main after the token pull request. | Recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23. |
+| D3 | Themes: contrast and no-colour-alone checks cover both the light and the dark block of `tokens.css`. | Recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23. |
+
+The header comment of `tokens.css` is narrower than D1; `docs/design-tokens.md` takes precedence, because the copy must stay identical to its source.
 
 ## Entry 10: open decisions settled by the ticket default
 

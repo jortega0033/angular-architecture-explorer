@@ -1,6 +1,6 @@
 # UI quality rules
 
-Ten rules for every screen and every piece of user-facing copy in this repository. They are binding (owner decision, 2026-11-22; see [owner-decisions.md](owner-decisions.md)). The UI is plain HTML, CSS and JavaScript in `architecture_explorer/static/`.
+Ten rules for every screen and every piece of user-facing copy in this repository. They are binding (owner decision, 2026-11-22; see [owner-decisions.md](owner-decisions.md)). The UI is plain HTML, CSS and JavaScript in `architecture_explorer/static/`. Colours come from the shared tokens in [design-tokens.md](design-tokens.md); new UI adds no colour literals.
 
 1. No thick accent border on one side of a card, callout, alert, list item or quote (for example `border-left: 4px solid <accent>`). Use spacing, type weight, an icon or a full hairline border instead.
 2. No soft tinted background with a thin border of the same hue as the default way to mark a status, tag, callout or card. One neutral surface and one clear signal (text, icon or a solid chip) is enough.

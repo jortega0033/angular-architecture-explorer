@@ -20,3 +20,4 @@ Ten rules for every screen and every piece of user-facing copy in this repositor
 - The Frontend Developer, UI Designer, UX Architect, Accessibility Auditor and Code Reviewer roles name this file in their checklists (where the role is installed), and the `implement-ticket` playbook names both skills.
 - Enforcement is by the review gate (Code Reviewer on every ticket), not by a script. Rule 1 can be linted; rule 2 cannot be detected reliably from CSS.
 - Existing screens that break a rule are fixed by a ticket, not as a side effect of other work.
+- Rule 8 is read with the accent and focus rules in [design-tokens.md](design-tokens.md) and owner decision 14 in [owner-decisions.md](owner-decisions.md): the accent also marks the current step, and `--focus` is a focus indicator, exempt from the accent limit.

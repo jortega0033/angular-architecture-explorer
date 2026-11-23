@@ -22,7 +22,7 @@ The UI uses the Pipenzo "Flow look" tokens in `architecture_explorer/static/toke
 ## Rules
 
 - New UI uses these tokens. No new colour literals in CSS, JavaScript or HTML.
-- Accent (D1, UI rule 8): yellow is used for the primary action, the current-step marker and the current selection. Owner decision, 2026-11-23. How a selection is drawn (recommended by the orchestrator, adopted under the owner's delegation of the same day): a solid `--primary` fill with `--on-primary` text, not only a yellow border (a yellow border has about 1.5:1 against white on light), plus a second sign that is not colour (weight, icon or text) and the existing `aria` attribute (for example `aria-selected` or `aria-current`). Never a tint with a same-hue border, and never a thick one-sided border.
+- Accent (D1, UI rule 8): yellow is used only for the primary action, the current-step marker and the current selection. Owner decision, 2026-11-23. How a selection is drawn (recommended by the orchestrator, adopted under the owner's delegation of the same day): a solid `--primary` fill with `--on-primary` text, not only a yellow border (a yellow border has about 1.5:1 against white on light), plus a second sign that is not colour (weight, icon or text) and the existing aria attribute (today `aria-current` on saved explorations, `aria-pressed` and `aria-current` on results). Never a tint with a same-hue border, and never a thick one-sided border.
 - Focus ring (D2): `--focus` is a focus indicator and is exempt from the accent limit, including where it is yellow in dark. A ticket that says the focus style stays unchanged means the rule on `main` after the token pull request. Recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23.
 - Themes (D3): contrast and no-colour-alone checks cover both the light block and the dark block of `tokens.css`. Recommended by the orchestrator, adopted under the owner's delegation of 2026-11-23.
 - Text never sits on a bare alpha layer; use the opaque surface tokens.
@@ -30,7 +30,7 @@ The UI uses the Pipenzo "Flow look" tokens in `architecture_explorer/static/toke
 
 ## Current state of the page
 
-Some selections in the page are still marked in a neutral colour. The page follows these rules in ticket work. That work is not done yet.
+No selection in the page follows D1 yet. The current saved exploration (`.project-list button[aria-current="true"]`) and the selected result (`.result-row[aria-pressed="true"]`) are neutral: a `--fg` edge on `--bg-sunken` with a 4px left border. The highlighted preview line (`.preview .line-row.hl`) is also neutral with a 4px left border. Changing them is separate ticket work; this document does not change the page.
 
 ## Light and dark
 

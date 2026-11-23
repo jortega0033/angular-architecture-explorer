@@ -23,7 +23,7 @@ body {
 
 .site-header {
   padding: 0.8rem 1.25rem 0.6rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
   background: var(--bg);
 }
 .site-header h1 { margin: 0; font-size: 1.3rem; letter-spacing: 0.01em; }
@@ -205,7 +205,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .loc .line { color: var(--fg); font-weight: 700; }
 .excerpt { display: block; font-family: var(--mono); font-size: 0.85rem; white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 0.1rem; }
 mark {
-  background: var(--bg-raised);
+  background: var(--surface);
   color: var(--fg);
   font-weight: 700;
   text-decoration: underline;

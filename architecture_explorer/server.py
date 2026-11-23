@@ -17,6 +17,7 @@ BODY_CAP = 16384
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 STATIC_FILES = {
     "/": ("index.html", "text/html; charset=utf-8"),
+    "/static/tokens.css": ("tokens.css", "text/css; charset=utf-8"),
     "/static/app.css": ("app.css", "text/css; charset=utf-8"),
     "/static/app.js": ("app.js", "text/javascript; charset=utf-8"),
 }

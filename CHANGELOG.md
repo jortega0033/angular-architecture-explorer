@@ -7,6 +7,7 @@ All notable changes to this project are recorded here. The format follows [Keep 
 ### Added
 
 - Delivery workflow: review gate hook, CI, pull request template, `/next-ticket` driver, UI quality rules and the `ui-ux-pro-max` and `unslop` skills.
+- Pipenzo Flow look design tokens (`tokens.css`, `docs/design-tokens.md`); `app.css` uses them in place of its own palette.
 
 ## [0.1.0]
 

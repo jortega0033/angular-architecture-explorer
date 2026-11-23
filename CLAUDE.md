@@ -102,6 +102,6 @@ How a ticket gets from the backlog to a pull request. Each piece is defined in i
 - **Permissions.** [`.claude/settings.json`](.claude/settings.json): documented commands are allowed; force pushes, pushes to `main`, `gh pr merge`, releases and reads of `.env` are denied; edits to CI, agent configuration (at any depth, so ticket worktrees ask too) and Loop files ask first; changing agent configuration is not part of a ticket.
 - **CI.** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs on the draft pull request and must be green before `gh pr ready`; a pull request is never opened or marked ready with a gate not run.
 - **Pull request.** [Template](.github/pull_request_template.md); labels `status:ready`, `status:blocked`, `status:in-progress`, `needs-decision`.
-- **UI and prose.** [docs/ui-quality.md](docs/ui-quality.md) (ten binding rules) with the `ui-ux-pro-max` and `unslop` skills in `.claude/skills/`.
+- **UI and prose.** [docs/ui-quality.md](docs/ui-quality.md) (ten binding rules) with the `ui-ux-pro-max` and `unslop` skills in `.claude/skills/`. Colours come from the Pipenzo tokens in [docs/design-tokens.md](docs/design-tokens.md); new UI uses them and adds no colour literals.
 - **Changelog.** Every ticket pull request adds one line to [CHANGELOG.md](CHANGELOG.md).
 - **Decisions and releases.** [docs/owner-decisions.md](docs/owner-decisions.md) records the owner's decisions; [docs/RELEASING.md](docs/RELEASING.md) the release steps; [SECURITY.md](SECURITY.md) how to report a vulnerability. Only the owner merges and releases.

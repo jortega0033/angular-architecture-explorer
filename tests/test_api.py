@@ -22,7 +22,7 @@ class HealthAndStatic(ServerTestCase):
         text = payload.decode("utf-8")
         for needle in ("Exploration title", "Search query", "Save exploration"):
             self.assertIn(needle, text)
-        for path in ("/static/app.js", "/static/app.css"):
+        for path in ("/static/app.js", "/static/app.css", "/static/tokens.css"):
             self.assertEqual(self.srv.request("GET", path)[0], 200)
         self.assertEqual(self.srv.request("GET", "/static/../store.py")[0], 404)
         self.assertEqual(self.srv.request("GET", "/static/%2e%2e/store.py")[0], 404)

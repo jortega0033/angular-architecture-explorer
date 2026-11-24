@@ -57,3 +57,13 @@ Each ticket marks its proposals **[Default]**; the implementer may change one wi
 | #10 | CI workflow file name | Superseded: CI is installed by this setup as `.github/workflows/ci.yml` (job `test`, Linux and Windows, Python 3.12 and 3.13) |
 
 No ticket was found that states no default. For any later ticket that does, take the conservative option and flag it in the issue.
+
+## Program decisions (owner, 2026-11-24)
+
+The owner accepted the goal and each suggestion below. They apply from the phase they name; the rules of `CLAUDE.md` hold for phase 1 as written.
+
+| Decision | Implemented in |
+|---|---|
+| The repository has a program goal above phase 1: an architecture workbench for whole Angular codebases, in six phases. | Program issue #41 |
+| The plan excludes the Angular compiler. Suggested: use it only as the test oracle. | Program issue #41 |
+| Analysed applications need a licence check. Suggested: fetch at pinned commits, commit none. | Program issue #41 |

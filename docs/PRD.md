@@ -1,5 +1,7 @@
 # Angular Architecture Explorer — PRD and Technical Specification
 
+> This document specifies phase 1 of the program in [#41](https://github.com/jortega0033/angular-architecture-explorer/issues/41). Hour figures in it are early estimates for that phase; its open tickets add up to 46 to 84 hours (2026-11-24). Work that it defers is planned in the later phases only where the program names it.
+
 Package: `architecture_explorer`. Status: baseline implemented and verified on 2026-11-22 (28 automated tests pass; the browser demo AE-C19 was run manually). Commands, results and what remains unverified are in [ARCHITECTURE.md](ARCHITECTURE.md#verification-record). The epic below is future work, tracked as GitHub issue #1 and its children.
 
 Labels used throughout: **[Decision]** fixed, **[Default]** a documented proposal that can change, **[Open]** unresolved.

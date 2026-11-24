@@ -4,6 +4,25 @@ A read-only, offline, local tool for searching a source snapshot and saving expl
 
 The current baseline searches a small bundled synthetic TypeScript project. See [docs/PRD.md](docs/PRD.md) for scope and planned work.
 
+## Program goal
+
+Build an architecture workbench that understands an Angular codebase as deeply as its compiler: types, templates, dependency injection, signals and lazy routes, across thousands of files and their whole Git history, and that proposes and checks refactorings.
+
+The program is planned ([#41](https://github.com/jortega0033/angular-architecture-explorer/issues/41)). Phase 1 is the current epic [#1](https://github.com/jortega0033/angular-architecture-explorer/issues/1) and the only phase with tickets.
+
+**Score.** Share of facts (injections, template bindings, routes, types) that agree with the official Angular compiler on a pinned set of open-source applications.
+
+| Phase | Content | Hours (rough) | Issue |
+|---|---|---|---|
+| 1 | The current epic and its tickets | 46 to 84 | [#1](https://github.com/jortega0033/angular-architecture-explorer/issues/1) |
+| 2 | Own TypeScript and template analysis | 150 to 260 | [#42](https://github.com/jortega0033/angular-architecture-explorer/issues/42) |
+| 3 | Semantic graph | 120 to 200 | [#43](https://github.com/jortega0033/angular-architecture-explorer/issues/43) |
+| 4 | Time | 90 to 150 | [#44](https://github.com/jortega0033/angular-architecture-explorer/issues/44) |
+| 5 | Change | 140 to 240 | [#45](https://github.com/jortega0033/angular-architecture-explorer/issues/45) |
+| 6 | Scale and collaboration | 90 to 150 | [#46](https://github.com/jortega0033/angular-architecture-explorer/issues/46) |
+
+About 640 to 1080 engineer hours in total: rough estimates, not measurements. The numbers in the score and the finish lines are targets until a run shows them. Only phase 1 has tickets to work; the sub-issues of a later phase are written when it starts. No single session is expected to reach the end.
+
 ## Run
 
 ```
